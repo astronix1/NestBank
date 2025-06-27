@@ -14,60 +14,44 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.nestbank.data.BottomNavigation
 
+
 val items = listOf(
-    BottomNavigation(
-        title = "Home",
-        icon = Icons.Rounded.Home
-    ),
-
-    BottomNavigation(
-        title = "Wallet",
-        icon = Icons.Rounded.Wallet
-    ),
-
-    BottomNavigation(
-        title = "Notifications",
-        icon = Icons.Rounded.Notifications
-    ),
-
-    BottomNavigation(
-        title = "Account",
-        icon = Icons.Rounded.AccountCircle
-    )
+    BottomNavigation("Home", Icons.Rounded.Home, "homescreen"),
+    BottomNavigation("Wallet", Icons.Rounded.Wallet, "wallet"),
+    BottomNavigation("Notifications", Icons.Rounded.Notifications, "notifications"),
+    BottomNavigation("Account", Icons.Rounded.AccountCircle, "account")
 )
 
-@Preview
+
 @Composable
-fun BottomNavigationBar() {
+fun BottomNavigationBar(navController: NavController) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     NavigationBar {
-        Row(
-            modifier = Modifier.background(MaterialTheme.colorScheme.inverseOnSurface)
-        ) {
-
-            items.forEachIndexed { index, item ->
-                NavigationBarItem(
-                    selected = index == 0,
-                    onClick = {},
-                    icon = {
-                        Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.title,
-                            tint = MaterialTheme.colorScheme.onBackground
-                        )
-                    },
-                    label = {
-                        Text(
-                            text = item.title,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
+        items.forEach { item ->
+            NavigationBarItem(
+                selected = currentRoute == item.route,
+                onClick = {
+                    if (currentRoute != item.route) {
+                        navController.navigate(item.route) {
+                            popUpTo(navController.graph.startDestinationId) { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
-                )
-            }
-
+                },
+                icon = { Icon(item.icon, contentDescription = item.title) },
+                label = { Text(item.title) }
+            )
         }
     }
 }
+

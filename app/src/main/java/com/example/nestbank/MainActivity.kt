@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NestBankTheme {
+            NestBankTheme{
 
 
                 SetBarColor(color = MaterialTheme.colorScheme.background)
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    HomeScreen()
+                    AppNavigation()
 
                 }
             }
@@ -52,21 +52,15 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun HomeScreen() {
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar()
-        }
-    ) { padding ->
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
+                .padding(16.dp)
         ) {
 
             WalletSection()
@@ -78,4 +72,5 @@ fun HomeScreen() {
 
 
     }
-}
+
+
