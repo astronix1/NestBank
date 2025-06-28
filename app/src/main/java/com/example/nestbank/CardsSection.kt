@@ -41,7 +41,7 @@ val cards = listOf(
         cardType = "VISA",
         cardNumber = "3664 7865 3786 3976",
         cardName = "Business",
-        balance = 46.467,
+        balance = 46469.7,
         color = getGradient(PurpleStart, PurpleEnd),
     ),
 
@@ -49,7 +49,7 @@ val cards = listOf(
         cardType = "MASTER CARD",
         cardNumber = "234 7583 7899 2223",
         cardName = "Savings",
-        balance = 6.467,
+        balance = 64678.9,
         color = getGradient(BlueStart, BlueEnd),
     ),
 
@@ -57,7 +57,7 @@ val cards = listOf(
         cardType = "VISA",
         cardNumber = "0078 3467 3446 7899",
         cardName = "School",
-        balance = 3.467,
+        balance = 3467.0,
         color = getGradient(OrangeStart, OrangeEnd),
     ),
 
@@ -65,7 +65,7 @@ val cards = listOf(
         cardType = "MASTER CARD",
         cardNumber = "3567 7865 3786 3976",
         cardName = "Trips",
-        balance = 26.47,
+        balance = 2689.5,
         color = getGradient(GreenStart, GreenEnd),
     ),
 )
@@ -135,7 +135,7 @@ fun CardItem(
             )
 
             Text(
-                text = "$ ${card.balance}",
+                text = "₹ ${card.balance}",
                 color = Color.White,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold

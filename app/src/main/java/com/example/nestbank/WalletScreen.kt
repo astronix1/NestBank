@@ -48,7 +48,7 @@ fun WalletScreen() {
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    text = "$12,450.00",
+                    text = "₹12,450.00",
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -102,7 +102,7 @@ fun WalletScreen() {
             TransactionItem(
                 name = "Starbucks",
                 date = "June 26",
-                amount = "-$5.75"
+                amount = "-₹5.75"
             )
         }
     }

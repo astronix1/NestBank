@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.nestbank.ui.theme.NestBankTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NestBankTheme{
+            NestBankTheme(darkTheme = false){
 
 
                 SetBarColor(color = MaterialTheme.colorScheme.background)
@@ -53,9 +54,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
+
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
 
         Column(
             modifier = Modifier
@@ -66,7 +67,7 @@ fun HomeScreen() {
             WalletSection()
             CardsSection()
             Spacer(modifier = Modifier.height(16.dp))
-            FinanceSection()
+            FinanceSection(navController)
             CurrenciesSection()
         }
 

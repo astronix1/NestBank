@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.nestbank.data.Finance
 import com.example.nestbank.ui.theme.BlueStart
 import com.example.nestbank.ui.theme.GreenStart
@@ -35,31 +36,35 @@ val financeList = listOf(
     Finance(
         icon = Icons.Rounded.StarHalf,
         name = "My\nBusiness",
-        background = OrangeStart
+        background = OrangeStart,
+        route = "business"
     ),
 
     Finance(
         icon = Icons.Rounded.Wallet,
         name = "My\nWallet",
-        background = BlueStart
+        background = BlueStart,
+        route = "wallet"
     ),
 
     Finance(
         icon = Icons.Rounded.StarHalf,
         name = "Finance\nAnalytics",
-        background = PurpleStart
+        background = PurpleStart,
+        route = "analytics"
     ),
 
     Finance(
         icon = Icons.Rounded.MonetizationOn,
         name = "My\nTransactions",
-        background = GreenStart
+        background = GreenStart,
+        route = "transactions"
     ),
 )
 
-@Preview
+
 @Composable
-fun FinanceSection() {
+fun FinanceSection(navController: NavHostController) {
     Column {
         Text(
             text = "Finance",
@@ -71,7 +76,7 @@ fun FinanceSection() {
 
         LazyRow {
             items(financeList.size) {
-                FinanceItem(it)
+                FinanceItem(it, navController)
             }
         }
     }
@@ -79,13 +84,11 @@ fun FinanceSection() {
 
 @Composable
 fun FinanceItem(
-    index: Int
+    index: Int,
+    navController: NavHostController
 ) {
     val finance = financeList[index]
-    var lastPaddingEnd = 0.dp
-    if (index == financeList.size - 1) {
-        lastPaddingEnd = 16.dp
-    }
+    val lastPaddingEnd = if (index == financeList.size - 1) 16.dp else 0.dp
 
     Box(modifier = Modifier.padding(start = 16.dp, end = lastPaddingEnd)) {
         Column(
@@ -93,7 +96,10 @@ fun FinanceItem(
                 .clip(RoundedCornerShape(25.dp))
                 .background(MaterialTheme.colorScheme.secondaryContainer)
                 .size(120.dp)
-                .clickable {}
+                .clickable {
+                    navController.navigate(finance.route)
+
+                }
                 .padding(13.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {

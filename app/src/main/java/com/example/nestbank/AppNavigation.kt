@@ -22,10 +22,13 @@ fun AppNavigation() {
             startDestination = "homescreen",
             modifier = Modifier.padding(padding)
         ) {
-            composable("homescreen") { HomeScreen() }
+            composable("homescreen") { HomeScreen(navController) }
             composable("wallet") { WalletScreen() }
             composable("notifications") { NotificationScreen() }
             composable("account") { AccountScreen() }
+            composable("business") { BusinessScreen() }
+            composable("analytics") { AnalyticsScreen() }
+            composable("transactions") { TransactionsScreen() }
         }
     }
 }
